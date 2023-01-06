@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: FunScriptGraph
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"Kind":"Flow","collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":"Fun","summary":null,"pan":{"x":0.0,"y":0.0},"zoom":1.0,"elements":[{"coroutine":true,"defaultValues":{},"position":{"x":-452.0,"y":-109.0},"guid":"d6579d08-8b8d-4974-8371-01fcb917a2a9","$version":"A","$type":"Unity.VisualScripting.OnEnterState","$id":"9"},{"defaultValues":{"seconds":{"$content":2.0,"$type":"System.Single"},"unscaledTime":{"$content":false,"$type":"System.Boolean"}},"position":{"x":-187.0,"y":-109.0},"guid":"4e036b80-7a3d-4a81-8a7d-3df7ed4eaa25","$version":"A","$type":"Unity.VisualScripting.WaitForSecondsUnit","$id":"11"},{"chainable":false,"member":{"name":"Log","parameterTypes":["System.Object"],"targetType":"UnityEngine.Debug","targetTypeName":"UnityEngine.Debug","$version":"A"},"defaultValues":{},"position":{"x":71.0,"y":-109.0},"guid":"20a267cf-d58f-48cb-bccf-9a74a4881a3b","$version":"A","$type":"Unity.VisualScripting.InvokeMember","$id":"13"},{"argumentCount":0,"defaultValues":{"name":{"$content":"FAREWELL","$type":"System.String"},"target":null},"position":{"x":322.0,"y":-128.0},"guid":"cbd44a23-2db6-43e5-929d-48da7014060f","$version":"A","$type":"Unity.VisualScripting.TriggerCustomEvent","$id":"16"},{"type":"System.String","value":{"$content":"We
+      can have some fun","$type":"System.String"},"defaultValues":{},"position":{"x":-187.0,"y":55.0},"guid":"2c99d5ae-ab5b-49d5-9b9d-bc85b3bc2bb9","$version":"A","$type":"Unity.VisualScripting.Literal","$id":"18"},{"sourceUnit":{"$ref":"9"},"sourceKey":"trigger","destinationUnit":{"$ref":"11"},"destinationKey":"enter","guid":"e49c8476-9847-4ac1-a127-a0a2ae0ee7a1","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"11"},"sourceKey":"exit","destinationUnit":{"$ref":"13"},"destinationKey":"enter","guid":"23f436f3-11c0-4c08-9c35-cd9c92286ec2","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"13"},"sourceKey":"exit","destinationUnit":{"$ref":"16"},"destinationKey":"enter","guid":"649fd1f9-3bfb-4b5f-96c6-63ecf3f284ed","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"18"},"sourceKey":"output","destinationUnit":{"$ref":"13"},"destinationKey":"%message","guid":"9af3c036-0916-4725-94a3-0307d7f7eec1","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}'
+    _objectReferences: []

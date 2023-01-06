@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: FarewellScriptGraph
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"Kind":"Flow","collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":"Farewell","summary":null,"pan":{"x":168.0,"y":24.99934},"zoom":1.0,"elements":[{"coroutine":true,"defaultValues":{},"position":{"x":-408.0,"y":-124.0},"guid":"8bdd438c-e354-4ed4-adb6-1245941289a8","$version":"A","$type":"Unity.VisualScripting.OnEnterState","$id":"9"},{"defaultValues":{"inputText":{"$content":"See
+      you! Bye!","$type":"System.String"}},"position":{"x":359.0,"y":-204.0},"guid":"560582fa-7f8c-47a8-afe6-152113f6e534","$version":"A","$type":"AzureEmbodiedAISamples.SampleSpeak","$id":"11"},{"defaultValues":{},"position":{"x":189.0,"y":-125.0},"guid":"91ad18b3-934a-49aa-bb31-1be730b70117","$version":"A","$type":"Unity.VisualScripting.If","$id":"13"},{"defaultValues":{"inputText":{"$content":"Okay!
+      Bye!","$type":"System.String"}},"position":{"x":360.0,"y":-14.0},"guid":"81cd2d15-5b4a-4fb0-978c-91b5d1097613","$version":"A","$type":"AzureEmbodiedAISamples.SampleSpeak","$id":"15"},{"defaultValues":{"timeOut":{"$content":2.0,"$type":"System.Single"}},"position":{"x":-145.0,"y":-125.0},"guid":"08db66b5-c4bc-48ae-9c3c-042b033a6575","$version":"A","$type":"AzureEmbodiedAISamples.SampleWatch","$id":"17"},{"chainable":false,"member":{"name":"Log","parameterTypes":["System.Object"],"targetType":"UnityEngine.Debug","targetTypeName":"UnityEngine.Debug","$version":"A"},"defaultValues":{},"position":{"x":913.0,"y":-107.0},"guid":"19fdea3b-672f-44b4-9045-2a814df57a30","$version":"A","$type":"Unity.VisualScripting.InvokeMember","$id":"19"},{"type":"System.String","value":{"$content":"Sample
+      ended","$type":"System.String"},"defaultValues":{},"position":{"x":676.0,"y":76.0},"guid":"87f10184-cdd1-41ea-9607-a51f19ebbb47","$version":"A","$type":"Unity.VisualScripting.Literal","$id":"22"},{"sourceUnit":{"$ref":"13"},"sourceKey":"ifTrue","destinationUnit":{"$ref":"11"},"destinationKey":"inputTrigger","guid":"5feed820-93b3-4c96-8b87-e9b200089840","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"17"},"sourceKey":"outputTrigger","destinationUnit":{"$ref":"13"},"destinationKey":"enter","guid":"ada862b2-e99a-4be0-8c98-31ed9989446b","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"13"},"sourceKey":"ifFalse","destinationUnit":{"$ref":"15"},"destinationKey":"inputTrigger","guid":"379ac420-8052-439e-9e13-14a69c9dcc55","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"9"},"sourceKey":"trigger","destinationUnit":{"$ref":"17"},"destinationKey":"inputTrigger","guid":"6dd8aaf0-9f2e-494c-a76d-592d8d63328d","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"11"},"sourceKey":"outputTrigger","destinationUnit":{"$ref":"19"},"destinationKey":"enter","guid":"8b726019-6e49-4eea-b166-cb1d5bc6f1c7","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"15"},"sourceKey":"outputTrigger","destinationUnit":{"$ref":"19"},"destinationKey":"enter","guid":"9360779c-c376-4b40-b376-34e124b50eac","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"17"},"sourceKey":"outputFlag","destinationUnit":{"$ref":"13"},"destinationKey":"condition","guid":"21933ba5-3a62-4b0c-a0c9-aced2013e883","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"22"},"sourceKey":"output","destinationUnit":{"$ref":"19"},"destinationKey":"%message","guid":"e19d808e-4573-43d5-8d98-4710e315446a","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}'
+    _objectReferences: []

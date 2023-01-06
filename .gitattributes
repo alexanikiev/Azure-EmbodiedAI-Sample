@@ -1,0 +1,9 @@
+/apps/Sample/onnxruntime_providers_cuda.dll
+/apps/Sample/cudnn_cnn_infer64_8.dll
+/apps/Sample/cudnn_ops_infer64_8.dll
+/apps/Sample/cufft64_10.dll
+/apps/Sample/dnn_model_2_0_op11.onnx
+/apps/Sample/Assets/Plugins/onnxruntime_providers_cuda.dll
+/apps/Sample/Assets/Plugins/cudnn_cnn_infer64_8.dll
+/apps/Sample/Assets/Plugins/cudnn_ops_infer64_8.dll
+/apps/Sample/Assets/Plugins/cufft64_10.dll
