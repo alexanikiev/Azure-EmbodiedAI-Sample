@@ -1,0 +1,6 @@
+{
+    "STTSubscriptionKey": "your_stt_subscription_key",
+    "STTRegion": "your_stt_region",
+    "TTSSubscriptionKey": "your_tts_subscription_key",
+    "TTSRegion": "your_tts_region"
+}
