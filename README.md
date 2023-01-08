@@ -17,7 +17,9 @@ Solution architecture of this template is described in detail in the following M
 * [Thoughts about Embodiment of AI](https://medium.com/@alexanikiev/thoughts-about-embodiment-of-ai-4fa4d7841d2c)
 * [More about Embodiment of AI](https://medium.com/@alexanikiev/more-about-embodiment-of-ai-d9871251090d)
 
-Solution demo video can be found [here](https://www.youtube.com/channel/UCNWEuI2ijKLNe_txLEQTEDA) and Code walkthrough is available [here](https://www.youtube.com/channel/UCNWEuI2ijKLNe_txLEQTEDA).
+Solution demo video can be found [here](https://youtu.be/4azVEpdIp0Y) and Code walkthrough is available [here](https://www.youtube.com/@alexanikiev).
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=4azVEpdIp0Y" target="_blank"><img src="http://img.youtube.com/vi/4azVEpdIp0Y/0.jpg" alt="Azure EmbodiedAI Sample Setup and Demo" width="560" height="315" border="10" /></a>
 
 ## Prerequisites
 
