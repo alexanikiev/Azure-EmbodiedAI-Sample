@@ -1,6 +1,6 @@
 # Azure-EmbodiedAI-Sample
 
-Welcome to the Azure EmbodiedAI Sample repository on GitHub. With only about 500 lines of custom code written with the help of [ChatGPT](https://chat.openai.com/) this simple Unity project demonstrates how to build an EmbodiedAI character which is able to speak, listen and see by using Azure Cognitive Services (Azure Speech SDK), Azure Kinect Body Tracking SDK and Unity Visual Scripting. Initial design for Microsoft's legendary Clippy character is inspired by the Blender project [here](https://github.com/david0429/Clippy). 
+Welcome to the Azure EmbodiedAI Sample repository on GitHub. With only about 500 lines of custom code written with the help of [ChatGPT](https://chat.openai.com/) this simple Unity project demonstrates how to build an EmbodiedAI character which is able to speak, listen and see by using Azure Cognitive Services (Azure Speech SDK), Azure Kinect Body Tracking SDK and Unity Visual Scripting. Initial design for Microsoft's legendary Clippy character is inspired by Blender project [here](https://github.com/david0429/Clippy). 
 
 ## Getting Started
 
@@ -17,7 +17,7 @@ Solution architecture of this template is described in detail in the following M
 * [Thoughts about Embodiment of AI](https://medium.com/@alexanikiev/thoughts-about-embodiment-of-ai-4fa4d7841d2c)
 * [More about Embodiment of AI](https://medium.com/@alexanikiev/more-about-embodiment-of-ai-d9871251090d)
 
-Solution demo video can be found [here](https://youtu.be/4azVEpdIp0Y) and Code walkthrough is available [here](https://www.youtube.com/@alexanikiev).
+Solution demo video can be found [here](https://youtu.be/4azVEpdIp0Y) and Code walkthrough is available [here](https://youtu.be/z17xC5Bq7DI).
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=4azVEpdIp0Y" target="_blank"><img src="http://img.youtube.com/vi/4azVEpdIp0Y/0.jpg" alt="Azure EmbodiedAI Sample Setup and Demo" width="560" height="315" border="10" /></a>
 
@@ -28,7 +28,7 @@ Please see the list below with the compatibility guidance for the versions of so
 | Prerequisite                   | Download Link                                                   | Version           |
 |--------------------------------|-----------------------------------------------------------------|-------------------|
 | Unity                          | https://unity.com/download                                      | 2021.3.16f1 (LTS) |
-| Azure Speech SDK for Unity*    | https://aka.ms/csspeech/unitypackage                            | 1.24.2            |
+| Azure Speech SDK for Unity     | https://aka.ms/csspeech/unitypackage                            | 1.24.2            |
 | Azure Kinect Body Tracking SDK | https://www.microsoft.com/en-us/download/details.aspx?id=104221 | 1.1.2             |
 | NVIDIA CUDA Toolkit            | https://developer.nvidia.com/cuda-downloads                     | 11.7              |
 | NVIDIA cuDNN for CUDA          | https://developer.nvidia.com/rdp/cudnn-archive                  | 8.5.0             |
