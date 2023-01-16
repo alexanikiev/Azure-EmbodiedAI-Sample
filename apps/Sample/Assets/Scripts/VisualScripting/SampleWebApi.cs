@@ -15,6 +15,12 @@ namespace AzureEmbodiedAISamples
         public ControlOutput outputTrigger;
 
         [DoNotSerialize]
+        public ValueInput webApiType;
+
+        [DoNotSerialize]
+        public ValueInput inputContent;
+
+        [DoNotSerialize]
         public ValueOutput outputContent;
 
         private SampleManager _manager;
@@ -35,12 +41,14 @@ namespace AzureEmbodiedAISamples
         {
             inputTrigger = ControlInputCoroutine("inputTrigger", flow => outputTrigger, WebApiAsync);
             outputTrigger = ControlOutput("outputTrigger");
+            webApiType = ValueInput<SampleWebApiType>("webApiType", SampleWebApiType.None);
+            inputContent = ValueInput<string>("inputContent", string.Empty);
             outputContent = ValueOutput<string>("outputContent");
         }
 
         public IEnumerator WebApiAsync(Flow flow)
         {
-            var result = Manager.WebApiAsync();
+            var result = Manager.WebApiAsync((SampleWebApiType)flow.GetValue(webApiType), flow.GetValue(inputContent).ToString());
             yield return new WaitUntil(() => result.IsCompleted);
             flow.SetValue(outputContent, result.Result);
             yield return outputTrigger;

@@ -29,6 +29,35 @@
       "Sku": {
         "Name": "S0"
       }
+    },
+    {
+      "type": "Microsoft.CognitiveServices/accounts",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2021-04-30",
+      "kind": "TextAnalytics",
+      "name": "[concat(parameters('prefix'), 'clu', parameters('suffix'))]",
+      "Sku": {
+        "Name": "F0"
+      }
+    },
+    {
+      "type": "Microsoft.Search/searchServices",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2020-08-01",
+      "name": "[concat(parameters('prefix'), 'search', parameters('suffix'))]",
+      "Sku": {
+        "Name": "standard"
+      }
+    },
+    {
+      "type": "Microsoft.CognitiveServices/accounts",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2021-04-30",
+      "kind": "OpenAI",
+      "name": "[concat(parameters('prefix'), 'openai', parameters('suffix'))]",
+      "Sku": {
+        "Name": "S0"
+      }
     }
   ]
 }

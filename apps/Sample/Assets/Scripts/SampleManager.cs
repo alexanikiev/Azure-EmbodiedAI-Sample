@@ -9,23 +9,26 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.IO;
 using System.Xml.Linq;
-using UnityEngine.Analytics;
-using UnityEngine.TextCore.Text;
-using System.Runtime.InteropServices.ComTypes;
-using System.Collections;
-using static UnityEngine.AudioClip;
-using UnityEngine.Networking;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace AzureEmbodiedAISamples
 {
     public class SampleManager : MonoBehaviour
     {
+        public SampleMode Mode; // Cloud/Hybrid
+
+        private SampleConfig SampleConfig;
+
         private SpeechConfig TTSConfig;
         private SpeechConfig STTConfig;
         private AudioConfig AudioMicrophoneConfig;
         private AudioConfig AudioSpeakerConfig; // SpeakAsyncSystem
         private AudioSource AudioSource; // SpeakAsyncUnity
-        private int SampleRate = 48000; // SpeakAsyncUnity // 48KHz
+        //private int SampleRate = 48000; // SpeakAsyncUnity // Cloud 48KHz
+        private int SampleRate = 24000; // SpeakAsyncUnity // Edge 24KHz
 
         public SpeechSynthesizer SpeechSynthesizer { get; private set; }
         public SpeechRecognizer SpeechRecognizer { get; private set; }
@@ -54,11 +57,16 @@ namespace AzureEmbodiedAISamples
         {
             string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), Application.productName + ".auth");
             string jsonString = File.ReadAllText(filePath);
-            SampleConfig SampleConfig = JsonUtility.FromJson<SampleConfig>(jsonString);
+            SampleConfig = JsonUtility.FromJson<SampleConfig>(jsonString);
 
-            TTSConfig = SpeechConfig.FromSubscription(SampleConfig.TTSSubscriptionKey, SampleConfig.TTSRegion);
-            TTSConfig.SetSpeechSynthesisOutputFormat(SpeechSynthesisOutputFormat.Raw48Khz16BitMonoPcm); // 48KHz
-            TTSConfig.SpeechSynthesisVoiceName = "en-US-JacobNeural";
+            TTSConfig = (Mode == SampleMode.Cloud) ?
+                SpeechConfig.FromSubscription(SampleConfig.TTSSubscriptionKey, SampleConfig.TTSRegion) :
+                SpeechConfig.FromHost(new Uri("ws://localhost:5002"));
+            // Reference:
+            // https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/rest-text-to-speech?tabs=streaming#audio-outputs
+            //TTSConfig.SetSpeechSynthesisOutputFormat(SpeechSynthesisOutputFormat.Raw48Khz16BitMonoPcm); // Cloud 48KHz
+            TTSConfig.SetSpeechSynthesisOutputFormat(SpeechSynthesisOutputFormat.Raw24Khz16BitMonoPcm); // Edge 24KHz
+            TTSConfig.SpeechSynthesisVoiceName = "en-US-AriaNeural";
             //AudioSpeakerConfig = AudioConfig.FromDefaultSpeakerOutput(); // SpeakAsyncSystem
             //SpeechSynthesizer = new SpeechSynthesizer(TTSConfig, AudioSpeakerConfig); // SpeakAsyncSystem
             SpeechSynthesizer = new SpeechSynthesizer(TTSConfig, null); // SpeakAsyncUnity
@@ -70,7 +78,9 @@ namespace AzureEmbodiedAISamples
             SpeechSynthesizer.VisemeReceived += SpeechSynthesizer_VisemeReceived;
             SpeechSynthesizer.BookmarkReached += SpeechSynthesizer_BookmarkReached;
 
-            STTConfig = SpeechConfig.FromSubscription(SampleConfig.STTSubscriptionKey, SampleConfig.STTRegion);
+            STTConfig = (Mode == SampleMode.Cloud) ?
+                SpeechConfig.FromSubscription(SampleConfig.STTSubscriptionKey, SampleConfig.STTRegion) :
+                SpeechConfig.FromHost(new Uri("ws://localhost:5001"));
             STTConfig.SetProperty(PropertyId.SpeechServiceConnection_InitialSilenceTimeoutMs, recognizerInitialSilenceTimeoutMs.ToString());
             STTConfig.SetProperty(PropertyId.Speech_SegmentationSilenceTimeoutMs, recognizerSegmentationSilenceTimeoutMs.ToString());
             AudioMicrophoneConfig = AudioConfig.FromDefaultMicrophoneInput();
@@ -104,7 +114,7 @@ namespace AzureEmbodiedAISamples
                     new XElement("voice",
                         new XAttribute(XNamespace.Xml + "lang", "en-US"),
                         new XAttribute(XNamespace.Xml + "gender", "Male"),
-                        new XAttribute("name", "en-US-JacobNeural"),
+                        new XAttribute("name", "en-US-AriaNeural"),
                         new XAttribute("style", "hopeful"),
                         new XElement("prosody",
                             new XAttribute(XNamespace.Xml + "rate", "+10.00%"),
@@ -222,8 +232,23 @@ namespace AzureEmbodiedAISamples
         }
         #endregion
 
-        #region Generic WebAPI
-        public async Task<string> WebApiAsync()
+        #region Purposeful WebAPIs
+        public async Task<string> WebApiAsync(SampleWebApiType webApiType, string inputContent)
+        {
+            switch (webApiType)
+            {
+                case SampleWebApiType.CLU:
+                    return await WebApiAsyncCLU(inputContent);
+                case SampleWebApiType.GPT:
+                    return await WebApiAsyncGPT(inputContent);
+                case SampleWebApiType.KB:
+                    return await WebApiAsyncKB(inputContent);
+                default:
+                    return await WebApiAsyncPostman(inputContent);
+            }
+        }
+
+        private async Task<string> WebApiAsyncPostman(string inputContent)
         {
             var httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri("https://postman-echo.com/");
@@ -238,6 +263,133 @@ namespace AzureEmbodiedAISamples
             {
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 return json;
+            }
+        }
+
+        private async Task<string> WebApiAsyncCLU(string inputContent)
+        {
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", SampleConfig.CLUSubscriptionKey);
+
+            var payload = new
+            {
+                kind = "Conversation",
+                analysisInput = new
+                {
+                    conversationItem = new
+                    {
+                        id = "PARTICIPANT_ID_HERE",
+                        text = inputContent,
+                        modality = "text",
+                        language = "en-US",
+                        participantId = "PARTICIPANT_ID_HERE"
+                    }
+                },
+                parameters = new
+                {
+                    projectName = "your_clu_project_name",
+                    verbose = true,
+                    deploymentName = "your_clu_deployment_name",
+                    stringIndexType = "TextElement_V8"
+                }
+            };
+
+            var json = JsonConvert.SerializeObject(payload);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var url = SampleConfig.CLUURL;
+            var response = await httpClient.PostAsync(url, data);
+            var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+            return ParseCLUResponse(responseString);
+        }
+
+        private string ParseCLUResponse(string jsonInput)
+        {
+            try
+            {
+                JObject jsonObject = JObject.Parse(jsonInput);
+                string topIntent = jsonObject["result"]["prediction"]["topIntent"].ToString();
+                return topIntent;
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex.Message);
+                return string.Empty;
+            }
+        }
+
+        private async Task<string> WebApiAsyncGPT(string inputContent)
+        {
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Add("api-key", SampleConfig.GPTSubscriptionKey);
+
+            var payload = new
+            {
+                prompt = inputContent,
+                max_tokens = 100,
+                temperature = 1,
+                frequency_penalty = 0,
+                presence_penalty = 0,
+                top_p = 0.5,
+                stop = (string)null
+            };
+
+            var json = JsonConvert.SerializeObject(payload);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var url = SampleConfig.GPTURL;
+            var response = await httpClient.PostAsync(url, data);
+            var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+            return ParseGPTResponse(responseString);
+        }
+
+        private string ParseGPTResponse(string jsonInput)
+        {
+            try
+            {
+                JObject jsonObject = JObject.Parse(jsonInput);
+                JArray choices = (JArray)jsonObject["choices"];
+                string outputString = "";
+                foreach (JObject choice in choices)
+                {
+                    outputString += choice["text"].ToString();
+                }
+
+                return outputString;
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex.Message);
+                return string.Empty;
+            }
+        }
+
+        private async Task<string> WebApiAsyncKB(string inputContent)
+        {
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Add("api-key", SampleConfig.KBSubscriptionKey);
+
+            var url = SampleConfig.KBURL + inputContent;
+            var response = await httpClient.GetAsync(url);
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            return ParseKBResponse(responseString);
+        }
+
+        private string ParseKBResponse(string jsonInput)
+        {
+            try
+            {
+                JObject jsonObject = JObject.Parse(jsonInput);
+                JArray value = (JArray)jsonObject["value"];
+                return value[0]["Answer"].ToString();
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex.Message);
+                return string.Empty;
             }
         }
         #endregion

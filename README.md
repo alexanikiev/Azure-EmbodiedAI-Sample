@@ -2,6 +2,10 @@
 
 Welcome to the Azure EmbodiedAI Sample repository on GitHub. With only about 500 lines of custom code written with the help of [ChatGPT](https://chat.openai.com/) this simple Unity project demonstrates how to build an EmbodiedAI character which is able to speak, listen and see by using Azure Cognitive Services (Azure Speech SDK), Azure Kinect Body Tracking SDK and Unity Visual Scripting. Initial design for Microsoft's legendary Clippy character is inspired by Blender project [here](https://github.com/david0429/Clippy). 
 
+## Motivation
+
+Make everything as simple as possible, but not simpler.
+
 ## Getting Started
 
 This Unity sample is intended for Windows Desktop platform. [Azure Kinect DK](https://azure.microsoft.com/en-us/products/kinect-dk/) and Azure Kinect Body Tracking SDK are leveraged for Body Tracking (seeing), it is recommended to use NVIDIA GeForce RTX graphics and CUDA processing mode for better performance, however CPU processing mode may also be used otherwise. For speaking and listening Azure Speech SDK is utilized, it is assumed that your PC has microphone and speakers.
