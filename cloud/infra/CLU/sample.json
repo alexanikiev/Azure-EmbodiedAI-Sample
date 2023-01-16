@@ -1,0 +1,45 @@
+{
+  "projectFileVersion": "2022-10-01-preview",
+  "stringIndexType": "Utf16CodeUnit",
+  "metadata": {
+    "projectKind": "Conversation",
+    "settings": {
+      "confidenceThreshold": 0
+    },
+    "projectName": "your_clu_project_name",
+    "multilingual": false,
+    "description": "your_clu_project_description",
+    "language": "en-us"
+  },
+  "assets": {
+    "projectKind": "Conversation",
+    "intents": [
+      {
+        "category": "None"
+      },
+      {
+        "category": "Help"
+      },
+      {
+        "category": "Fun"
+      }
+    ],
+    "entities": [],
+    "utterances": [
+      {
+        "text": "can you help me with something?",
+        "language": "en-us",
+        "intent": "Help",
+        "entities": [],
+        "dataset": "Train"
+      },
+      {
+        "text": "let's have some fun",
+        "language": "en-us",
+        "intent": "Fun",
+        "entities": [],
+        "dataset": "Train"
+      }
+    ]
+  }
+}

@@ -1,6 +1,12 @@
 {
-    "STTSubscriptionKey": "your_stt_subscription_key",
-    "STTRegion": "your_stt_region",
-    "TTSSubscriptionKey": "your_tts_subscription_key",
-    "TTSRegion": "your_tts_region"
+  "STTSubscriptionKey": "your_stt_subscription_key",
+  "STTRegion": "your_stt_region",
+  "TTSSubscriptionKey": "your_tts_subscription_key",
+  "TTSRegion": "your_tts_region",
+  "CLUSubscriptionKey": "your_clu_api_key",
+  "CLUURL": "your_clu_api_url",
+  "KBSubscriptionKey": "your_kb_api_key",
+  "KBURL": "your_kb_api_url",
+  "GPTSubscriptionKey": "your_gpt_api_key",
+  "GPTURL": "your_gpt_api_url"
 }
