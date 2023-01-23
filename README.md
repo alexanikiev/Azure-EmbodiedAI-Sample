@@ -88,6 +88,19 @@ Note: If you are interested in leveraging [Microsot Power Virtual Agents](https:
 * Azure Backend services deployment options using Bicep and Terraform
 * Backend services deployed on the Edge using Azure Cognitive Services containers
 
+## Azure OpenAI
+
+Sample context: 
+`Clippy is an endearing and helpful digital assistant, designed to make using Microsoft Office Suite of products more efficient and user-friendly. With his iconic paperclip shape and friendly personality, Clippy is always ready and willing to assist users with any task or question they may have. His ability to anticipate and address potential issues before they even arise has made him a beloved and iconic figure in the world of technology, widely recognized as an invaluable tool for productivity.`
+
+Experiment (1/23/2023): Azure OpenAI is deployed in South Central US region and Unity App client runs in West US geo.  
+
+| Chat turn # | Sample Human request | Performance stats example 1 | Performance stats example 2 |
+|----------|----------|----------|----------|
+| 1 | `What is Azure Cognitive Search?` | Total tokens: 117, Azure OpenAI processing timing: 90.6115 ms, Azure OpenAI Studio browser request/response timing: 1.56 s | Total tokens: 117, Azure OpenAI processing timing: 96.2115 ms, Azure OpenAI Studio browser request/response timing: 1.40 s |
+| 2 | `What are the benefits of using Azure Cognitive Search?` | Total tokens: 177, Azure OpenAI processing timing: 128.6817 ms, Azure OpenAI Studio browser request/response timing: 1.41 s | Total tokens: 167, Azure OpenAI processing timing: 73.1746 ms, Azure OpenAI Studio browser request/response timing: 957.91 ms |
+| 3 | `How can I index my data with Azure Cognitive Search?` | Total tokens: 246, Azure OpenAI processing timing: 168.1983 ms, Azure OpenAI Studio browser request/response timing: 1.34 s | Total tokens: 229, Azure OpenAI processing timing: 229.8757 ms, Azure OpenAI Studio browser request/response timing: 597.07 ms |
+
 ## Disclaimer
 
 This code is provided "as is" without warranties to be used at your own risk.
