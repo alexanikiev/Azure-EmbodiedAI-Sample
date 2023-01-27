@@ -1,0 +1,6 @@
+{ "index" : { "_index" : "kb", "_id" : "1" } }
+{ "Question" : "What is Azure Cognitive Search?", "Answer": "Azure Cognitive Search is a fully managed cloud search service that provides a rich search experience over structured and unstructured data." }
+{ "index" : { "_index" : "kb", "_id" : "2" } }
+{ "Question" : "What are the benefits of using Azure Cognitive Search?", "Answer": "Some benefits of using Azure Cognitive Search include: Easy to set up and scale. Advanced search capabilities such as full-text search, faceted navigation, and geospatial search. Built-in AI for natural language processing and image recognition. Secure and compliant with industry standards" }
+{ "index" : { "_index" : "kb", "_id" : "3" } }
+{ "Question" : "How can I index my data with Azure Cognitive Search?", "Answer": "You can index your data with Azure Cognitive Search by using the Azure Cognitive Search REST API, the Azure Search .NET SDK, or the Azure Search indexers." }
