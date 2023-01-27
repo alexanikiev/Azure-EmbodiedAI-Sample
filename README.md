@@ -55,11 +55,22 @@ To run the sample please open SampleScene and hit Play. You may also select Clip
 
 ![Unity Visual Scripting State Graph](/docs/images/UnityVisualScriptingStateGraph.png)
 
-## Deployment
+## Cloud Deployment
 
 This sample features One-Click Deployment for the necessary Azure Backend services. If you need to sign up for Azure Subscription please follow [this](https://azure.microsoft.com/en-us/free/) link.
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Falexanikiev%2FAzure-EmbodiedAI-Sample%2Fmain%2Fcloud%2Finfra%2Ftemplate.json)
+
+## Edge Deployment
+
+| Capability                           | Docker Container                                                                | Protocol | Port  |
+|--------------------------------------|---------------------------------------------------------------------------------|----------|-------|
+| STT (Speech-to-Text)                 | mcr.microsoft.com/azure-cognitive-services/speechservices/speech-to-text        | WS(S)    | 5001  |
+| TTS (Neural-Text-to-Speech)          | mcr.microsoft.com/azure-cognitive-services/speechservices/neural-text-to-speech | WS(S)    | 5002  |
+| LUIS (Intent Recognition)            | mcr.microsoft.com/azure-cognitive-services/language/luis                        | HTTP(S)  | 5003  |
+| ELASTIC-OSS Elasticsearch            | docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2                        | HTTP(S)  | 9200  |
+| ELASTIC-OSS Kibana                   | docker.elastic.co/kibana/kibana-oss:7.10.2                                      | HTTP(S)  | 5601  |
+| GPT-J                                |                                                                                 | HTTP(S)  | 5004  |
 
 ## Next Steps
 
