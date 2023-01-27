@@ -1,0 +1,41 @@
+# https://www.docker.elastic.co/r/elasticsearch/elasticsearch-oss
+# https://www.docker.elastic.co/r/kibana/kibana-oss
+version: '3'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2
+    container_name: elasticsearch-node
+    environment:
+      - node.name=elasticsearch-node
+      - cluster.name=elasticsearch-cluster
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms128m -Xmx128m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elasticsearch-network
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana-oss:7.10.2
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch-node:9200
+    ports:
+      - 5601:5601
+    networks:
+      - elasticsearch-network
+    depends_on:
+      - elasticsearch
+
+volumes:
+  elasticsearch-data:
+    driver: local
+
+networks:
+  elasticsearch-network:
+    driver: bridge
