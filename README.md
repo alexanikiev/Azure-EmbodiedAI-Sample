@@ -91,13 +91,15 @@ Please consider adding the following capabilities to your EmbodiedAI project as 
 * Knowledge Base: [Azure Cognitive Search (Semantic Search)](https://azure.microsoft.com/en-us/products/search/), [Question Answering](https://azure.microsoft.com/en-us/products/cognitive-services/question-answering/), etc.
 * Any integrations with custom AI services via WebAPI: [Azure Machine Learning](https://azure.microsoft.com/en-us/products/machine-learning/), etc.
 
-Note: If you are interested in leveraging [Microsot Power Virtual Agents](https://azure.microsoft.com/en-us/products/power-virtual-agents/) (PVA) on Azure while building your EmbodiedAI project, please review [this](https://medium.com/@alexanikiev/thoughts-about-embodiment-of-ai-4fa4d7841d2c) Medium article which provides details about using [DialogServiceConnector class](https://learn.microsoft.com/en-us/dotnet/api/microsoft.cognitiveservices.speech.dialog.dialogserviceconnector) based on [Interact with a bot in C# Unity](https://github.com/Azure-Samples/cognitive-services-speech-sdk/tree/master/samples/csharp/unity/virtual-assistant) GitHub template.   
+Note: If you are interested in leveraging [Microsot Power Virtual Agents](https://azure.microsoft.com/en-us/products/power-virtual-agents/) (PVA) on Azure while building your EmbodiedAI project, please review [this](https://medium.com/@alexanikiev/thoughts-about-embodiment-of-ai-4fa4d7841d2c) Medium article which provides details about using [DialogServiceConnector class](https://learn.microsoft.com/en-us/dotnet/api/microsoft.cognitiveservices.speech.dialog.dialogserviceconnector) based on [Interact with a bot in C# Unity](https://github.com/Azure-Samples/cognitive-services-speech-sdk/tree/master/samples/csharp/unity/virtual-assistant) GitHub template.
+
+Please also review important Game Development Concepts in the context of Azure Speech SDK explained in detail in [this](https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/gaming-concepts) article.
 
 ## Future Updates
 
 * Character Rig, animations using Unity Mechanim and Lip sync visemes
 * Azure Backend services deployment options using Bicep and Terraform
-* Backend services deployed on the Edge using Azure Cognitive Services containers
+* Backend services deployed on the Edge using Helm chart on Kubernetes (K8S) cluster
 
 ## Azure OpenAI
 
