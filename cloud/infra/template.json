@@ -37,7 +37,7 @@
       "kind": "TextAnalytics",
       "name": "[concat(parameters('prefix'), 'clu', parameters('suffix'))]",
       "Sku": {
-        "Name": "F0"
+        "Name": "S0"
       }
     },
     {
