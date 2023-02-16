@@ -102,6 +102,12 @@ Please also review important Game Development Concepts in the context of Azure S
 * Backend services deployed on the Edge using Helm chart on Kubernetes (K8S) cluster
 * Sample template for Unreal Engine (UE) using Blueprints
 
+## Lip Sync Visemes
+
+This template features a simple and yet robust implementation of Lip Sync Visemes using Azure Speech SDK as explained in [this](https://www.youtube.com/watch?v=lo898xUzPPA) video. You can choose to introduce visemes for your character using Maya Blend shapes, Blender shape keys, etc. Then in Unity you can animate visemes by manipulating with Blend shape weights, by means of Unity Blend tree, etc.
+
+![Lip Sync Visemes Maya Blend Shapes](/docs/images/ClippyMaya_LipSync_Visemes.png)
+
 ## Azure OpenAI
 
 Sample context: 
