@@ -97,9 +97,10 @@ Please also review important Game Development Concepts in the context of Azure S
 
 ## Future Updates
 
-* Character Rig, animations using Unity Mechanim and Lip sync visemes
+* Character Rig and animations using Unity Mechanim
 * Azure Backend services deployment options using Bicep and Terraform
 * Backend services deployed on the Edge using Helm chart on Kubernetes (K8S) cluster
+* Sample template for Unreal Engine (UE) using Blueprints
 
 ## Azure OpenAI
 
