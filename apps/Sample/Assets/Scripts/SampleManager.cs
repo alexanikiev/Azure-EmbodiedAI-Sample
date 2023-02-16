@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using System.Linq;
+using System.Collections;
 
 namespace AzureEmbodiedAISamples
 {
@@ -42,6 +44,14 @@ namespace AzureEmbodiedAISamples
 
         private SynchronizationContext synchronizationContext;
         private CancellationTokenSource cancellationToken;
+
+        private Dictionary<int, int> VisemesDict; // Azure Speech SDK viseme IDs to Blend shapes IDs
+        private List<SampleViseme> VisemesList; // List of visemes for a specific utterance
+        private SkinnedMeshRenderer skinnedMeshRenderer;
+        private GameObject Mouth;
+
+        private float transitionDuration = 0.1f; // Duration of the blend shape transition
+        private int currentVisemeIndex = -1; // Index of the current viseme
 
         private void Awake()
         {
@@ -97,6 +107,22 @@ namespace AzureEmbodiedAISamples
             }
 
             AudioSource = GetComponent<AudioSource>(); // SpeakAsyncUnity
+
+            // Phonemes to visemes mapping
+            // Reference: https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/how-to-speech-synthesis-viseme
+            VisemesDict = new Dictionary<int, int>(){
+                { 0, 11 /*"Mouth_Neutral*/ },
+                { 1, 10 /*"Mouth_A_E_I"*/ }, { 2, 10 /*"Mouth_A_E_I"*/ }, { 3, 10 /*"Mouth_A_E_I"*/ },
+                { 4, 8 /*"Mouth_EE"*/ }, { 5, 8 /*"Mouth_EE"*/ }, { 6, 6 /*"Mouth_Ch_J_Sh"*/ },
+                { 7, 1 /*"Mouth_Q_W_OO"*/ }, { 8, 9 /*"Mouth_O"*/ }, { 9, 10 /*"Mouth_A_E_I"*/ },
+                { 10, 9 /*"Mouth_O"*/ }, { 11, 10 /*"Mouth_A_E_I"*/ }, { 12, 8 /*"Mouth_EE"*/ },
+                { 13, 5 /*"Mouth_R"*/ }, { 14, 0 /*"Mouth_L"*/ }, { 15, 7 /*"Mouth_C_D_G_K_N_S_T_X_Y_Z"*/ },
+                { 16, 6 /*"Mouth_Ch_J_Sh"*/ }, { 17, 0 /*"Mouth_L"*/ }, { 18, 2 /*"Mouth_F_V"*/ },
+                { 19, 3 /*"Mouth_Th"*/ }, { 20, 7 /*"Mouth_C_D_G_K_N_S_T_X_Y_Z"*/ }, { 21, 4 /*"Mouth_B_M_P"*/ }
+            };
+
+            Mouth = GameObject.FindGameObjectWithTag("Mouth");
+            skinnedMeshRenderer = Mouth.GetComponent<SkinnedMeshRenderer>();
         }
 
         void Update()
@@ -182,6 +208,7 @@ namespace AzureEmbodiedAISamples
                 });
 
             AudioSource.clip = audioClip;
+            StartCoroutine(AnimateLipSync());
             AudioSource.Play();
 
             while (AudioSource.isPlaying)
@@ -190,6 +217,73 @@ namespace AzureEmbodiedAISamples
             }
 
             return true;
+        }
+
+        IEnumerator AnimateLipSync()
+        {
+            currentVisemeIndex = -1;
+
+            for (int i = 0; i < VisemesList.Count - 1; i++)
+            {
+                float visemeStartTime = VisemesList[i].AudioOffset;
+                float visemeEndTime = VisemesList[i + 1].AudioOffset;
+                float visemeDuration = visemeEndTime - visemeStartTime;
+
+                if (currentVisemeIndex != -1)
+                {
+                    // Deactivate previous viseme
+                    DeactivateViseme(currentVisemeIndex, transitionDuration);
+                }
+
+                int visemeId = (int)VisemesList[i].VisemeId;
+
+                if (VisemesDict.ContainsKey(visemeId))
+                {
+                    currentVisemeIndex = VisemesDict[visemeId];
+                }
+                else
+                {
+                    throw new Exception("Key not found");
+                }
+
+                // Activate current viseme
+                ActivateViseme(currentVisemeIndex, visemeDuration / 1000f);
+                yield return new WaitForSeconds(visemeDuration / 1000f);
+            }
+
+            if (currentVisemeIndex != -1)
+            {
+                // Deactivate final viseme (the last viseme corresponds to 0 = Silence)
+                DeactivateViseme(currentVisemeIndex, transitionDuration);
+            }
+
+            VisemesList.Clear();
+        }
+
+        private void ActivateViseme(int blendShapeIndex, float duration)
+        {
+            StartCoroutine(LerpBlendShapeWeight(blendShapeIndex, 0, 100, duration));
+        }
+
+        private void DeactivateViseme(int blendShapeIndex, float duration)
+        {
+            float currentWeight = skinnedMeshRenderer.GetBlendShapeWeight(blendShapeIndex);
+            StartCoroutine(LerpBlendShapeWeight(blendShapeIndex, currentWeight, 0, duration));
+        }
+
+        IEnumerator LerpBlendShapeWeight(int blendShapeIndex, float startWeight, float targetWeight, float duration)
+        {
+            float elapsedTime = 0.0f;
+            while (elapsedTime < duration)
+            {
+                float t = elapsedTime / duration;
+                float currentWeight = Mathf.Lerp(startWeight, targetWeight, t);
+                skinnedMeshRenderer.SetBlendShapeWeight(blendShapeIndex, currentWeight);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            skinnedMeshRenderer.SetBlendShapeWeight(blendShapeIndex, targetWeight);
         }
 
         public async Task<string> ListenAsync()
@@ -415,8 +509,10 @@ namespace AzureEmbodiedAISamples
 
         private void SpeechSynthesizer_SynthesisStarted(object sender, SpeechSynthesisEventArgs e)
         {
-            //TODO: Implement event handler as necessary
-            //synchronizationContext.Post(_ => { Variables.Application.Set("SampleApplicationVariable", string.Empty); }, null);
+            // Visemes: Prepare to capture generated visemes
+            synchronizationContext.Post(_ => {
+                VisemesList = new List<SampleViseme>();
+            }, null);
         }
 
         private void SpeechSynthesizer_Synthesizing(object sender, SpeechSynthesisEventArgs e)
@@ -427,8 +523,10 @@ namespace AzureEmbodiedAISamples
 
         private void SpeechSynthesizer_SynthesisCompleted(object sender, SpeechSynthesisEventArgs e)
         {
-            //TODO: Implement event handler as necessary
-            //synchronizationContext.Post(_ => { Variables.Application.Set("SampleApplicationVariable", string.Empty); }, null);
+            // Visemes: Display captured generated visemes for debugging
+            synchronizationContext.Post(_ => {
+                Debug.Log($"Visemes captured : " + string.Join(",", VisemesList.Select(v => $"{v.VisemeId}:{v.AudioOffset}")));
+            }, null);
         }
 
         private void SpeechSynthesizer_SynthesisCanceled(object sender, SpeechSynthesisEventArgs e)
@@ -439,8 +537,11 @@ namespace AzureEmbodiedAISamples
 
         private void SpeechSynthesizer_VisemeReceived(object sender, SpeechSynthesisVisemeEventArgs e)
         {
-            //TODO: Implement event handler as necessary
+            // Visemes: Capture generated viseme
             //Debug.Log($"Viseme event received. Audio offset: " + $"{e.AudioOffset / 10000}ms, viseme id: {e.VisemeId}.");
+            synchronizationContext.Post(_ => {
+                VisemesList.Add(new SampleViseme((uint)(e.AudioOffset / 10000), e.VisemeId));
+            }, null);
         }
 
         private void SpeechSynthesizer_BookmarkReached(object sender, SpeechSynthesisBookmarkEventArgs e)
