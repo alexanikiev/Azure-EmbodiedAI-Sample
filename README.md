@@ -115,7 +115,7 @@ Sample context:
 
 Experiment (1/23/2023): Azure OpenAI is deployed in South Central US region and Unity App client runs in West US geo.  
 
-| Chat turn # | Sample Human request | Performance stats example 1 | Performance stats example 2 |
+| Chat turn # | Sample Human request | Responsiveness test example 1 | Responsiveness test example 2 |
 |----------|----------|----------|----------|
 | 1 | `What is Azure Cognitive Search?` | Total tokens: 117, Azure OpenAI processing timing: 90.6115 ms, Azure OpenAI Studio browser request/response timing: 1.56 s | Total tokens: 117, Azure OpenAI processing timing: 96.2115 ms, Azure OpenAI Studio browser request/response timing: 1.40 s |
 | 2 | `What are the benefits of using Azure Cognitive Search?` | Total tokens: 177, Azure OpenAI processing timing: 128.6817 ms, Azure OpenAI Studio browser request/response timing: 1.41 s | Total tokens: 167, Azure OpenAI processing timing: 73.1746 ms, Azure OpenAI Studio browser request/response timing: 957.91 ms |
