@@ -101,6 +101,7 @@ Please also review important Game Development Concepts in the context of Azure S
 * Azure Backend services deployment options using Bicep and Terraform
 * Backend services deployed on the Edge using Helm chart on Kubernetes (K8S) cluster
 * Sample template for Unreal Engine (UE) using Blueprints
+* Sample template for WebGL using Babylon.js
 
 ## Lip Sync Visemes
 
