@@ -1,0 +1,13 @@
+FROM mcr.microsoft.com/vscode/devcontainers/anaconda
+
+# Set the working directory
+WORKDIR /app
+
+# Install PyTorch
+RUN pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
+
+# Copy the script into the container
+COPY sample.py .
+
+# Run the script inside the container
+CMD ["python", "sample.py"]
