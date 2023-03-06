@@ -122,6 +122,14 @@ Experiment (1/23/2023): Azure OpenAI is deployed in South Central US region and 
 | 2 | `What are the benefits of using Azure Cognitive Search?` | Total tokens: 177, Azure OpenAI processing timing: 128.6817 ms, Azure OpenAI Studio browser request/response timing: 1.41 s | Total tokens: 167, Azure OpenAI processing timing: 73.1746 ms, Azure OpenAI Studio browser request/response timing: 957.91 ms |
 | 3 | `How can I index my data with Azure Cognitive Search?` | Total tokens: 246, Azure OpenAI processing timing: 168.1983 ms, Azure OpenAI Studio browser request/response timing: 1.34 s | Total tokens: 229, Azure OpenAI processing timing: 229.8757 ms, Azure OpenAI Studio browser request/response timing: 597.07 ms |
 
+## GPU Acceleration
+
+When building modern immersive EmbodiedAI experiences responsiveness, fluidity and speed of interaction is very important. Thus GPU Acceleration will be an important factor for the successful adoption of your solution. 
+
+We've already described [above](https://github.com/alexanikiev/Azure-EmbodiedAI-Sample#installing) how we take advantage of GPU Acceleration for Azure Kinect Body Tracking SDK.
+
+GPU Acceleration can also help in the context of any custom Machine Learning models you may want to build, train, deploy and expose as a Web Service (Web API) for consumption in your EmbodiedAI solution. Please find more information about Building and Deploying custom Machine Learning models in Azure Cloud and Edge in these Medium articles: [here](https://alexanikiev.medium.com/building-ai-applications-for-azure-cloud-65252b602042) and [here](https://alexanikiev.medium.com/deploying-ai-models-in-azure-cloud-23f3f52a8813). [PyTorch](https://pytorch.org/) is a popular open source machine learning framework which allows you to build such models and has built-in support for GPU Acceleration.
+
 ## Disclaimer
 
 This code is provided "as is" without warranties to be used at your own risk.
