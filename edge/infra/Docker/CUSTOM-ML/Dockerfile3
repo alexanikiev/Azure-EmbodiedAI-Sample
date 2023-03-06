@@ -1,0 +1,10 @@
+FROM pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel 
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the script into the container
+COPY sample.py .
+
+# Run the script inside the container
+CMD ["python", "sample.py"]
