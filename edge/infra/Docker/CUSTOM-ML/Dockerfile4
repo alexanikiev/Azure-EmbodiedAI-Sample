@@ -1,0 +1,13 @@
+FROM mcr.microsoft.com/azureml/openmpi3.1.2-cuda10.1-cudnn7-ubuntu18.04
+
+# Set the working directory
+WORKDIR /app
+
+# Install PyTorch
+RUN conda install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia
+
+# Copy the script into the container
+COPY sample.py .
+
+# Run the script inside the container
+CMD ["python", "sample.py"]
