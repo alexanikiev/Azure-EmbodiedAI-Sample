@@ -1,0 +1,17 @@
+FROM nvidia/cuda:11.6.0-cudnn8-devel-ubuntu20.04 
+
+# Update the package manager and install python
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the script into the container
+COPY sample.py .
+
+# Install PyTorch
+RUN pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
+
+# Run the script inside the container
+CMD ["python3", "sample.py"]
