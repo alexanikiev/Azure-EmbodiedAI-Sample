@@ -1,0 +1,10 @@
+FROM nvcr.io/nvidia/pytorch:23.02-py3
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the script into the container
+COPY sample.py .
+
+# Run the script inside the container
+CMD ["python", "sample.py"]
