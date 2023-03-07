@@ -132,10 +132,10 @@ GPU Acceleration can also help in the context of any custom Machine Learning mod
 
 | Base Docker Image                                                   | Description          | Dockerfile                                                                                                                         |
 |---------------------------------------------------------------------|----------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| python:3.10                                                         | Official Python      | [Link](https://github.com/alexanikiev/Azure-EmbodiedAI-Sample/blob/main/edge/infra/Docker/CUSTOM-ML/Dockerfile1) |
-| nvidia/cuda:11.6.0-cudnn8-devel-ubuntu20.04                         | NVIDIA               | [Link](https://github.com/alexanikiev/Azure-EmbodiedAI-Sample/blob/main/edge/infra/Docker/CUSTOM-ML/Dockerfile2) |
-| pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel                        | Official PyTorch     | [Link](https://github.com/alexanikiev/Azure-EmbodiedAI-Sample/blob/main/edge/infra/Docker/CUSTOM-ML/Dockerfile3) |
-| mcr.microsoft.com/azureml/openmpi3.1.2-cuda10.1-cudnn7-ubuntu18.04  | Azure AML            | [Link](https://github.com/alexanikiev/Azure-EmbodiedAI-Sample/blob/main/edge/infra/Docker/CUSTOM-ML/Dockerfile4) |
+| python:3.10                                                         | Python               | [Link](https://github.com/alexanikiev/Azure-EmbodiedAI-Sample/blob/main/edge/infra/Docker/CUSTOM-ML/Dockerfile1) |
+| nvidia/cuda:11.6.0-cudnn8-devel-ubuntu20.04                         | NVIDIA CUDA + cuDNN  | [Link](https://github.com/alexanikiev/Azure-EmbodiedAI-Sample/blob/main/edge/infra/Docker/CUSTOM-ML/Dockerfile2) |
+| pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel                        | PyTorch              | [Link](https://github.com/alexanikiev/Azure-EmbodiedAI-Sample/blob/main/edge/infra/Docker/CUSTOM-ML/Dockerfile3) |
+| mcr.microsoft.com/azureml/openmpi3.1.2-cuda10.1-cudnn7-ubuntu18.04  | Azure ML (AML)       | [Link](https://github.com/alexanikiev/Azure-EmbodiedAI-Sample/blob/main/edge/infra/Docker/CUSTOM-ML/Dockerfile4) |
 | nvcr.io/nvidia/pytorch:23.02-py3                                    | NVIDIA PyTorch       | [Link](https://github.com/alexanikiev/Azure-EmbodiedAI-Sample/blob/main/edge/infra/Docker/CUSTOM-ML/Dockerfile5) |
 | mcr.microsoft.com/vscode/devcontainers/anaconda                     | VSCode Dev Container | [Link](https://github.com/alexanikiev/Azure-EmbodiedAI-Sample/blob/main/edge/infra/Docker/CUSTOM-ML/Dockerfile0) |
 
