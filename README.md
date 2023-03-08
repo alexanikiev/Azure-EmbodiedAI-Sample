@@ -139,6 +139,8 @@ GPU Acceleration can also help in the context of any custom Machine Learning mod
 | nvcr.io/nvidia/pytorch:23.02-py3                                    | NVIDIA PyTorch       | [Link](https://github.com/alexanikiev/Azure-EmbodiedAI-Sample/blob/main/edge/infra/Docker/CUSTOM-ML/Dockerfile5) |
 | mcr.microsoft.com/vscode/devcontainers/anaconda                     | VSCode Dev Container | [Link](https://github.com/alexanikiev/Azure-EmbodiedAI-Sample/blob/main/edge/infra/Docker/CUSTOM-ML/Dockerfile0) |
 
+To build Docker images please use `docker build -t your_name .` command. To run Docker containers with GPU acceleration please use `docker run --gpus all your_name` command.
+
 Reference local setup: A laptop with NVIDIA RTX GPU (great for training), a desktop with 2 NVIDIA GTX GPUs and Azure Stack Edge Pro with NVIDIA Tesla T4 GPU (great for inference). 
 
 ## Disclaimer
